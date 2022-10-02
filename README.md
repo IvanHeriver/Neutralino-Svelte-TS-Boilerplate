@@ -2,10 +2,10 @@
 
 To use this boilerplate:
 
-- clone this repo
+- clone this repo or usig `npx degit`: `npx degit IvanHeriver/Neutralino-Svelte-TS-Boilerplate myapp`
 - install the dependencies: `yarn install`
 - install neutralino globally (see [Neutralino Getting Started](https://neutralino.js.org/docs/getting-started/your-first-neutralinojs-app)): `npm install -g @neutralinojs/neu`
-- setup neutralino for the project: `neu update`
+- setup neutralino for the project (download neutralino binaries and client js library): `neu update`
 - run the project in development mode: `npm run dev`
 - build the project: `npm run build`
 
