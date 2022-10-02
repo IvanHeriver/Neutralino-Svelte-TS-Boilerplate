@@ -1,13 +1,12 @@
 {
-  "name": "svelte-app",
+  "name": "neutralino-svelte-ts-boilerplate",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build-svelte": "rollup -c ",
+    "build-svelte": "rollup -c",
     "dev-svelte": "rollup -c -w",
     "start-svelte": "sirv ressources --single --ignores --no-clear",
-    "check-svelte": "svelte-check --tsconfig ./tsconfig.json",
-    "dev": "concurrently \"npm run dev-svelte\" \"neu run -- --window-enable-inspector\" -k",
+    "dev": "set USING_NEU=true && rollup -c -w",
     "build": "npm run build-svelte && neu build"
   },
   "devDependencies": {
@@ -15,7 +14,6 @@
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-typescript": "^8.0.0",
     "@tsconfig/svelte": "^2.0.0",
-    "concurrently": "^7.4.0",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.0",

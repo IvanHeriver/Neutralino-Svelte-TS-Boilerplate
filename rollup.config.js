@@ -8,13 +8,35 @@ import typescript from "@rollup/plugin-typescript";
 import css from "rollup-plugin-css-only";
 
 const production = !process.env.ROLLUP_WATCH;
+const neutralino = !!process.env.USING_NEU;
 
-function serve() {
+function toExit() {
+  if (server) server.kill(0);
+}
+
+function neu() {
+  console.log(!production);
+  console.log(neutralino);
   let server;
 
-  function toExit() {
-    if (server) server.kill(0);
-  }
+  return {
+    writeBundle() {
+      if (server) return;
+      server = require("child_process").spawn(
+        "neu",
+        ["run", "--", "--window-enable-inspector"],
+        {
+          stdio: ["ignore", "inherit", "inherit"],
+          shell: true,
+        }
+      );
+      process.on("SIGTERM", toExit);
+      process.on("exit", toExit);
+    },
+  };
+}
+function serve() {
+  let server;
 
   return {
     writeBundle() {
@@ -72,7 +94,9 @@ export default {
 
     // In dev mode, call `npm run start` once
     // the bundle has been generated
-    !production && serve(),
+    !production && !neutralino && serve(),
+
+    !production && neutralino && neu(),
 
     // Watch the `public` directory and refresh the
     // browser on changes when not in production
